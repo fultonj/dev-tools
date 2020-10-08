@@ -32,6 +32,7 @@
   - name: Include variables
     include_vars: vars/default.yaml
 
+    # you might wish to comment this out after it runs the first time
   - name: Clone the dev-scripts repo
     git:
       repo: "{{ dev_scripts_repo | default('https://github.com/openshift-metal3/dev-scripts.git', true) }}"
@@ -73,22 +74,22 @@
           https://cloud.redhat.com/openshift/install/pull-secret and copy it
           there manually.
 
-  - name: Copy ci-token file 
-    when: secrets_repo is undefined
-    block:
-    - set_fact:
-        secrets_repo_path: "{{ base_path }}"
-    - name: Copy ci-token
-      copy:
-        dest: "{{ base_path }}/ci-token"
-        src: files/ci-token
-    rescue:
-    - fail:
-        msg: |
-          files/ci-token is not present. You must obtain it from
-          https://api.ci.openshift.org (by clicking the upper right 
-          drop-down and selecting "Copy Login Command") and copy it
-          there manually.
+  # - name: Copy ci-token file 
+  #   when: secrets_repo is undefined
+  #   block:
+  #   - set_fact:
+  #       secrets_repo_path: "{{ base_path }}"
+  #   - name: Copy ci-token
+  #     copy:
+  #       dest: "{{ base_path }}/ci-token"
+  #       src: files/ci-token
+  #   rescue:
+  #   - fail:
+  #       msg: |
+  #         files/ci-token is not present. You must obtain it from
+  #         https://api.ci.openshift.org (by clicking the upper right 
+  #         drop-down and selecting "Copy Login Command") and copy it
+  #         there manually.
 
   - name: use secrets_repo
     when: secrets_repo is defined

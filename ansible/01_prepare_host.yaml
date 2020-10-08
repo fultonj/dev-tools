@@ -78,7 +78,8 @@
         pool: '^(Red Hat Enterprise Server for x86_64)$'
 
     - name: enable rhel-8-for-x86_64-appstream-rpms and advanced-virt-for-rhel-8-x86_64-rpms
-      command: subscription-manager repos --enable=rhel-8-for-x86_64-appstream-rpms --enable=advanced-virt-for-rhel-8-x86_64-rpms
+      command: subscription-manager repos --enable=rhel-8-for-x86_64-appstream-htb-rpms --enable=advanced-virt-beta-for-rhel-8-x86_64-rpms
+      # command: subscription-manager repos --enable=rhel-8-for-x86_64-appstream-rpms --enable=advanced-virt-for-rhel-8-x86_64-rpms
 
   - name: install packages and enable services
     block:
